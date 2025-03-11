@@ -69,13 +69,18 @@ public class Tool extends Equippable {
     public int requiredNumberOfValues()
     {
         // Replace this with the correct value
-        return -1;
+        return 6;
     }
 
     @Override
     public void fromTokens(String[] tokens)
     {
-
+        this.setName(tokens[0]);
+        this.setMaterial(tokens[1]);
+        this.setDurability(Integer.parseInt(tokens[2]));
+        this.setSpeed(Integer.parseInt(tokens[3]));
+        this.setModifier(tokens[4]);
+        this.setModifierLevel(Integer.parseInt(tokens[5]));
     }
 
     /**
@@ -84,7 +89,16 @@ public class Tool extends Equippable {
     @Override
     public Item clone()
     {
-        return null;
+
+        Tool cpy = new Tool();
+        cpy.setName(this.getName());
+        cpy.setMaterial(this.getMaterial());
+        cpy.setDurability(this.getDurability());
+        cpy.setSpeed(this.getSpeed());
+        cpy.setModifier(this.getModifier());
+        cpy.setModifierLevel(this.getModifierLevel());
+        
+        return cpy;
     }
 
     /**
@@ -101,6 +115,13 @@ public class Tool extends Equippable {
         }
 
         Tool rhsItem = (Tool) rhs;
+        if (this.getName().equals(rhsItem.getName())
+        && this.getSpeed() == rhsItem.getSpeed() 
+        && this.getMaterial().equals(rhsItem.getMaterial())
+        && this.getModifier().equals(rhsItem.getModifier())
+        && this.getModifierLevel() == rhsItem.getModifierLevel()) {
+            return true;
+        }
 
         return false;
     }
